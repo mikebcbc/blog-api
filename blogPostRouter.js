@@ -7,6 +7,8 @@ const jsonParser = bodyParser.json();
 const { BlogPosts } = require('./models');
 
 BlogPosts.create('My Life', 'meh', 'Mike Constantino');
+BlogPosts.create('His Life', '5/10', 'Frankenstein');
+BlogPosts.create('New Movie', 'Its alright', 'Jack Nicholson');
 
 router.get('/', (req, res) => {
 	res.json(BlogPosts.get());
@@ -53,6 +55,12 @@ router.put('/:id', jsonParser, (req, res) => {
   })
 
   res.status(204).json(updatedPost);
+})
+
+router.delete('/:id', (req, res) => {
+	BlogPosts.delete(req.params.id);
+  console.log(`Deleted blog post: \`${req.params.ID}\``);
+  res.status(204).end();
 })
 
 module.exports = router;
