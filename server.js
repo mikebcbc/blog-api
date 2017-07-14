@@ -8,6 +8,35 @@ app.use(morgan('common'));
 
 app.use('/blog-posts', blogPostRouter);
 
-app.listen(8080, () => {
-	console.log('We on port 8080.');
-})
+let server; // declaring a server object so runServer and closeServer use the same
+
+function runServer() {
+	const port = process.env.port || 8080;
+	return new Promise((resolve, reject) => {
+		server = app.listen(port, () => {
+			console.log(`We on port ${port}`);
+			resolve(server);
+		}).on('error', err => {
+			reject(err);
+		});
+	});
+}
+
+function closeServer() {
+	return new Promise((resolve, reject) => {
+		console.log('Shutting down server');
+		server.close(err => {
+			if (err) {
+				reject(err);
+				return;
+			}
+			resolve();
+		});
+	});
+}
+
+if (require.main === module) {
+	runServer().catch(err => console.error(err));
+}
+
+module.exports = {app, runServer, closeServer};

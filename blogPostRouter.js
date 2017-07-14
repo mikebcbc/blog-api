@@ -54,7 +54,7 @@ router.put('/:id', jsonParser, (req, res) => {
   	publishDate: req.body.publishDate
   })
 
-  res.status(204).json(updatedPost);
+  res.status(200).json(updatedPost);
 })
 
 router.delete('/:id', (req, res) => {
