@@ -6,7 +6,6 @@ const jsonParser = bodyParser.json();
 
 const { BlogPosts } = require('./models');
 
-BlogPosts.create('My Life', 'meh', 'Mike Constantino');
 BlogPosts.create('His Life', '5/10', 'Frankenstein');
 BlogPosts.create('New Movie', 'Its alright', 'Jack Nicholson');
 
