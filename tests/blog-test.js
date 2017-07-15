@@ -24,7 +24,7 @@ describe('Blog Post API', function() {
 				res.should.be.json;
 				res.body.should.be.a('array');
 				res.body.length.should.be.at.least(1);
-				const expectedKeys = ['id', 'title', 'content', 'author'];
+				const expectedKeys = ['id', 'title', 'content', 'author', 'publishDate'];
 				res.body.forEach(function(post) {
 					post.should.be.a('object');
 					post.should.include.keys(expectedKeys);
@@ -41,9 +41,9 @@ describe('Blog Post API', function() {
 				res.should.have.status(201);
 				res.should.be.json;
 				res.body.should.be.a('object');
-				res.body.should.include.keys('id', 'title', 'content', 'author');
+				res.body.should.include.keys('id', 'title', 'content', 'author', 'publishDate');
 				res.body.id.should.not.be.null;
-				res.body.should.deep.equal(Object.assign(newPost, {id: res.body.id}));
+				res.body.should.deep.equal(Object.assign(newPost, {id: res.body.id, publishDate: res.body.publishDate}));
 			});
 	});
 
